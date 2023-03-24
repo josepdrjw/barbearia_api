@@ -4,28 +4,19 @@
 <details>
   <summary><strong>👨‍💻 O que deverá ser desenvolvido</strong></summary>
 
-  Neste projeto você vai desenvolver uma API e um banco de dados para a produção de conteúdo para um blog! 
+  Neste projeto você vai desenvolver uma API e um banco de dados para uma Barbearia. 
 
-  Você deverá desenvolver uma aplicação em `Node.js` usando o pacote `sequelize` para fazer um `CRUD` de posts.
+  Aplicação em `Node.js` usando o pacote `sequelize` para fazer `CRUD`.
 
-  1. Você deverá desenvolver endpoints que estarão conectados ao seu banco de dados seguindo os princípios do REST;
+  1. Endpoints conectados ao banco de dados seguindo os princípios do REST;
 
-  2. Para fazer um post é necessário usuário e login, portanto será trabalhada a **relação entre** `user` e `post`; 
+  2. Para fazer um agendamento é necessário usuário e login; 
 
   3. Será necessária a utilização de categorias para os posts, trabalhando, assim, a **relação de** `posts` para `categories` e de `categories` para `posts`.
 
 <br />
 </details>
 
-<details>
-  <summary><strong>🗓 Data de Entrega</strong></summary>
-
-  * Projeto individual.
-  * Serão `3` dias de projeto.
-  * Data de entrega para avaliação **regular** do projeto: `14/03/2023 14:00`.
-  * Data de entrega para avaliação **final** do projeto: `27/03/2023 14:00`.
-
-</details>
 
 <br />
 
