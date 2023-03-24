@@ -12,8 +12,6 @@
 
   2. Para fazer um agendamento é necessário usuário e login; 
 
-  3. Será necessária a utilização de categorias para os posts, trabalhando, assim, a **relação de** `posts` para `categories` e de `categories` para `posts`.
-
 <br />
 </details>
 
