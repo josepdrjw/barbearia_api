@@ -3,6 +3,7 @@ const rotaCadastraCliente = require('./routes/clientes.routers');
 const rotaLogin = require('./routes/login.router');
 const rotaBarbeiros = require('./routes/barbeiros.router');
 const rotaServicos = require('./routes/servicos.router');
+const rotaAgendamentos = require('./routes/agendamentos.router');
 const cors = require('cors');
 
 // ...
@@ -21,6 +22,8 @@ app.use('/cadastro-clientes', rotaCadastraCliente);
 app.use('/login', rotaLogin);
 app.use('/barbeiros', rotaBarbeiros);
 app.use('/servicos', rotaServicos);
+app.use('/horarios', rotaAgendamentos);
+app.use('/confirma/agendamento', rotaAgendamentos);
 
 // ...
 

@@ -20,31 +20,35 @@ module.exports = {
       id_cliente: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: {
-          model: 'clientes',
-          key: 'id'
-        }
+        // references: {
+        //   model: 'clientes',
+        //   key: 'id'
+        // }
       },
       id_barbeiro: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: {
-          model: 'barbeiros',
-          key: 'id'
-        }
+        // references: {
+        //   model: 'barbeiros',
+        //   key: 'id'
+        // }
       },
       id_servico: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: {
-          model: 'servicos',
-          key: 'id'
-        }
+        // references: {
+        //   model: 'servicos',
+        //   key: 'id'
+        // }
       },
       status: {
         type: Sequelize.ENUM('agendado', 'cancelado', 'concluido'),
         allowNull: false,
         defaultValue: 'agendado'
+      },
+      duration: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       createdAt: {
         type: Sequelize.DATE,
