@@ -1,5 +1,5 @@
 const service = require('../services/agendamentos.service');
-const moment = require('moment-timezone');
+// const moment = require('moment-timezone');
 
 //Esta função recebe uma data e um id de um barbeiro por paramantos retorna os horarios disponiveis de acordo com a data e id_barbeiro passados por prarameto
 const getHorarios = async (req, res) => {
@@ -18,6 +18,14 @@ const getHorarios = async (req, res) => {
     // return res.status(200).json({ idCliente: dados.usuariotoken.data.userId.id, barbeiros: [...resultBarbeiros ] });
 }
 
+// rota de buscade serviços agendados
+const getAgendamentos = async (req, res) => {
+    const { data } = req.params;
+    const agendados= await service.getAgendamentos(data);
+    console.log(agendados);
+    return res.status(200).json(agendados);
+}
+
 const postAgendamento = async (req, res) => {
     const id_cliente = req.body.usuariotoken.data.userId.id
     const hora = req.body.horarioSelecionado;
@@ -34,4 +42,4 @@ const postAgendamento = async (req, res) => {
     return res.status(201).json(resultAgendamento);
 }
 
-module.exports = { getHorarios, postAgendamento };
+module.exports = { getHorarios, postAgendamento, getAgendamentos };

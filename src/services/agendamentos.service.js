@@ -30,8 +30,9 @@ const getHourDura30min = async (dia, id) => {
         }
     });
 
-    const horarios = horarios60min.map(function (objeto) {
-        return objeto.hora.substring(0, 5);
+    // Essa função cria um novo array chamado horarios a partir do array horarios60min,
+    const horarios = horarios60min.map( (objeto) => {
+        return objeto.hora.substring(0, 5); // é aplicado a ela para retornar somente os cinco 
     });
     
     const duracao = 30;
@@ -99,7 +100,7 @@ const horariosDiasFuturos = (horaInicial, duracao, horaLimite, horariosReservado
 
 
 }
-
+// caso o dia seja o dia atual é chamada esta função
 const horariosDispon = (horaInicial, duracao, horaLimite, horariosReservados) => {
 
     const horaFinal = moment.tz(horaInicial, 'HH:mm', 'America/Sao_Paulo');
@@ -107,6 +108,21 @@ const horariosDispon = (horaInicial, duracao, horaLimite, horariosReservados) =>
 
     const horariosDisponiveis = [];
 
+    // verifica se o horario atual é maior ou igual a 21H e menor que 2359 para 
+    // garantir que continuará retornando o array vazio com a lista de horarios
+    // pois o loop while abaixo so garante de remover os horario que ja se passaram
+    // porem apartir das 21h o sistema ja reconhece como a data do dia seguinte mesmo ainda sendo
+    // a data do dia atual
+    const agora = moment.tz('America/Sao_Paulo');
+    const horarioAtual = agora.format('HHmm');
+    const horaAtualEmNumero = horarioAtual.replace(':', '').padStart(4, '0');
+    const condicao = Number(horaAtualEmNumero) >= 2100 && Number(horaAtualEmNumero) < 2359;
+
+    if (condicao) {
+        return horariosDisponiveis;
+    }
+
+    // atribue na constante `horaAtual` o horario atual usando a biblioteca moment
     const horaAtual = moment.tz('America/Sao_Paulo');
 
     while (horaFinal.format('HH:mm') <= horaLimite) {
@@ -128,25 +144,40 @@ const horariosDispon = (horaInicial, duracao, horaLimite, horariosReservados) =>
 // verifica se é o dia atual
 const verificaDiaAtual = (dia) => {
     const hoje = new Date();
-    const diaAtual = hoje.getDate();
+    let diaAtual = hoje.getDate();
 
 
     const partesData = dia.split("-");
     const diaR = partesData[2];
 
-    const diaNamber = Number(diaR)
+    let diaNamber = Number(diaR)
 
     // if (diaNamber < diaAtual) {
     //     return 'dia passado';
     // }
 
+    // pega a hora atual para caso o horario atual seja posterior as 21h ainda assim
+    // forçar que a data atual se mantenha como a data atual de fato e não ja considere
+    // a data do dia posterior
+    const agora = moment.tz('America/Sao_Paulo');
+    const horarioAtual = agora.format('HHmm');
+    const horaAtualEmNumero = horarioAtual.replace(':', '').padStart(4, '0');
+    const condicao = Number(horaAtualEmNumero) > 2100 && Number(horaAtualEmNumero) < 2359;
+
+
+    if (condicao) {
+        diaAtual -= 1;
+    }
+
+    console.log(diaAtual);
+
     if (diaNamber === diaAtual) {
         // console.log('O dia é atual verificaDiaAtual');
-        // console.log(typeof diaR);
+        console.log('atual hehe ');
         return true;
     } else {
         // console.log('Dia não atual verificaDiaAtual');
-        // console.log(typeof diaR);
+        console.log('nao atual ');
         return false;
     }
 
@@ -284,16 +315,42 @@ const getHorarios = async (dia, idBarbeiro) => {
 
 };
 
-const getAgendamentos = async (id) => {
+// const getAgendamentos = async (data) => {
+//     const resultAgendamentos = await models.agendamentos.findAll({
+//         where: {
+//             data,
+//             status: 'agendado',
+//         },
+//         order: [['data', 'ASC'], ['hora', 'ASC']]
+//     });
+//     return resultAgendamentos;
+// };
+
+const getAgendamentos = async (data) => {
     const resultAgendamentos = await models.agendamentos.findAll({
-        where: {
-            id_barbeiro: id,
-            status: 'agendado',
+      where: {
+        data,
+        status: 'agendado',
+      },
+      include: [
+        {
+          model: models.barbeiros,
+          attributes: ['id', 'name'], // traz apenas os atributos 'id' e 'nome' da tabela barbeiros
         },
-        order: [['data', 'ASC'], ['hora', 'ASC']]
+        {
+          model: models.servicos,
+          attributes: ['id', 'description', 'price'], // traz apenas os atributos 'id' e 'descricao' da tabela servicos
+        },
+        {
+            model: models.clientes,
+            attributes: ['id', 'name'], // traz apenas os atributos 'id' e 'descricao' da tabela servicos
+          },
+      ],
+      order: [['data', 'ASC'], ['hora', 'ASC']]
     });
     return resultAgendamentos;
-};
+  };
+  
 
 const postAgendamento = async (payload) => {
 

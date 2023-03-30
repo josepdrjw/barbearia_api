@@ -4,6 +4,7 @@ const rotaLogin = require('./routes/login.router');
 const rotaBarbeiros = require('./routes/barbeiros.router');
 const rotaServicos = require('./routes/servicos.router');
 const rotaAgendamentos = require('./routes/agendamentos.router');
+const rotaAgendados = require('./routes/agendados.router');
 const cors = require('cors');
 
 // ...
@@ -17,13 +18,16 @@ app.get('/', (_request, response) => {
 
 app.use(express.json());
 app.use(cors());
-
+// rotas de usuarios `Clientes`
 app.use('/cadastro-clientes', rotaCadastraCliente);
 app.use('/login', rotaLogin);
 app.use('/barbeiros', rotaBarbeiros);
 app.use('/servicos', rotaServicos);
 app.use('/horarios', rotaAgendamentos);
 app.use('/confirma/agendamento', rotaAgendamentos);
+
+//rotas de administrador
+app.use('/agendados', rotaAgendados);
 
 // ...
 

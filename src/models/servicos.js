@@ -12,7 +12,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     barbeiro_id: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'barbeiros',
+        key: 'id'
+      }
     },
     description: {
       type: DataTypes.STRING,
@@ -30,6 +34,10 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'servicos',
     timestamps: false
   });
+  
+  Servicos.associate = (models) => {
+    Servicos.belongsTo(models.barbeiros, { foreignKey: 'barbeiro_id' });
+  }
 
   return Servicos;
 };

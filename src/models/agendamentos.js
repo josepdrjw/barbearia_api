@@ -1,4 +1,4 @@
-// const { uniq } = require('shelljs');
+// // const { uniq } = require('shelljs');
 
 // /**
 //  * 
@@ -23,7 +23,11 @@
 //     id_cliente: {
 //       type: DataTypes.INTEGER,
 //       allowNull: false,
-//       unique: true
+//       unique: true,
+//       references: {
+//         model: 'clientes',
+//         key: 'id',
+//     },
 //     },
 //     data: {
 //       type: DataTypes.DATEONLY,
@@ -46,18 +50,18 @@
 //     createdAt: {
 //       type: DataTypes.DATE,
 //       allowNull: false,
-//       defaultValue: DataTypes.literal('NOW()')
+//       defaultValue: sequelize.literal('NOW()')
 //     },
 //   }, {
 //     tableName: 'agendamentos',
 //     timestamps: false
 //   });
 
-//   // Agendamento.belongsTo(sequelize.models.clientes, { foreignKey: 'cliente_id' });
+//   Agendamento.belongsTo(sequelize.models.clientes, { foreignKey: 'id_cliente' });
 
-//   // Agendamento.associate = (models) => {
-//   //   Agendamento.belongsTo(models.clientes, { foreignKey: 'cliente_id' });
-//   // }
+//   Agendamento.associate = (models) => {
+//     Agendamento.belongsTo(models.clientes, { foreignKey: 'id_cliente' });
+//   }
 
 //   return Agendamento;
 // };
@@ -77,16 +81,27 @@ module.exports = (sequelize, DataTypes) => {
     },
     id_servico: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'servicos',
+        key: 'id'
+      }
     },
     id_barbeiro: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'barbeiros',
+        key: 'id',
+    },
     },
     id_cliente: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      unique: true
+      references: {
+        model: 'clientes',
+        key: 'id',
+    },
     },
     data: {
       type: DataTypes.DATEONLY,
@@ -122,11 +137,14 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: true
   });
 
-  // Agendamento.belongsTo(sequelize.models.clientes, { foreignKey: 'cliente_id' });
+  // Agendamento.belongsTo(sequelize.models.clientes, { foreignKey: 'id_cliente' });
 
-  // Agendamento.associate = (models) => {
-  //   Agendamento.belongsTo(models.clientes, { foreignKey: 'cliente_id' });
-  // }
+  Agendamento.associate = (models) => {
+    Agendamento.belongsTo(models.clientes, { foreignKey: 'id_cliente' });
+    Agendamento.belongsTo(models.barbeiros, { foreignKey: 'id_barbeiro' });
+    Agendamento.belongsTo(models.servicos, { foreignKey: 'id_servico' });
+  }
+  
 
   return Agendamento;
 };
