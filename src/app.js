@@ -5,6 +5,7 @@ const rotaBarbeiros = require('./routes/barbeiros.router');
 const rotaServicos = require('./routes/servicos.router');
 const rotaAgendamentos = require('./routes/agendamentos.router');
 const rotaAgendados = require('./routes/agendados.router');
+const rotaRedefiniPassword = require('./routes/redefinir.router');
 const cors = require('cors');
 
 // ...
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use(cors());
 // rotas de usuarios `Clientes`
 app.use('/cadastro-clientes', rotaCadastraCliente);
+app.use('/redefinir-senha', rotaRedefiniPassword);
 app.use('/login', rotaLogin);
 app.use('/barbeiros', rotaBarbeiros);
 app.use('/servicos', rotaServicos);

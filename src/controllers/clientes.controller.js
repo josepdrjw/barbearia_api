@@ -1,23 +1,30 @@
+const bcrypt = require('bcrypt');
 const services = require('../services/clientes.service');
 const { geraToken } = require('../auth/Token/Token');
 
 const login = async (req, res) => {
-    const { email, password } = req.body;
+  const { email, password } = req.body;
 
-    const result = await services.getEmail(email);
+  const result = await services.getEmail(email);
 
-    if (result && result.email === email && result.password === password) {
-        const { id, name, email, image } = result;
-        const token = geraToken({ id, email });
-        return res.status(200).json({
-            name,
-            email,
-            image,
-            token,
-        });
+  if (result) {
+    const isPasswordValid = await bcrypt.compare(password, result.password);
+    console.log(isPasswordValid);
+
+    if (isPasswordValid) {
+      const { id, name, email, image } = result;
+      const token = geraToken({ id, email });
+      return res.status(200).json({
+        name,
+        email,
+        image,
+        token,
+      });
     }
-
-    return res.status(500).json({ message: 'Email ou senha inválida' });
+  }
+  // console.log(`senha fornecida ${password}`);
+  // console.log(`senha no banco ${result.password}`);
+  return res.status(401).json({ message: 'Email ou senha inválida' });
 }
 
 const cadClientes = async (req, res) => {
@@ -38,7 +45,7 @@ const cadClientes = async (req, res) => {
         
     }
     if (result.email === email) {
-        return res.status(409).json({ message: 'Já existe um usuário com este email' });
+        return res.status(409).json({ message: 'E-mail já cadastrado' });
     }
 
     // const dados = req.body;

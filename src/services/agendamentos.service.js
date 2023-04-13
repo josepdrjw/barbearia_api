@@ -326,10 +326,11 @@ const getHorarios = async (dia, idBarbeiro) => {
 //     return resultAgendamentos;
 // };
 
-const getAgendamentos = async (data) => {
+const getAgendamentos = async (data, id) => {
     const resultAgendamentos = await models.agendamentos.findAll({
       where: {
         data,
+        id_barbeiro: id,
         status: 'agendado',
       },
       include: [
@@ -343,11 +344,14 @@ const getAgendamentos = async (data) => {
         },
         {
             model: models.clientes,
-            attributes: ['id', 'name'], // traz apenas os atributos 'id' e 'descricao' da tabela servicos
+            attributes: ['id', 'name', 'image'], // traz apenas os atributos 'id' e 'descricao' da tabela servicos
           },
       ],
       order: [['data', 'ASC'], ['hora', 'ASC']]
     });
+
+    // const resultMatriz = resultAgendamentos.map(objeto => Object.values(objeto));
+
     return resultAgendamentos;
   };
   
@@ -359,4 +363,4 @@ const postAgendamento = async (payload) => {
     // return { service: {...dados} };
 }
 
-module.exports = { getAgendamentos, getHorarios, postAgendamento, getHorariosReservados };
+module.exports = { getHorarios, postAgendamento, getHorariosReservados, getAgendamentos };

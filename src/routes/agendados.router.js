@@ -5,7 +5,7 @@ const verifyToken = require('../middlewares/validtoken');
 
 const rota = Router();
 
-rota.get('/:data', verifyToken, controller.getAgendamentos);
+rota.get('/:data/:id', verifyToken, controller.getAgendamentos);
 // rota.post('/', verifyToken, controller.postAgendamento);
 
 module.exports = rota;

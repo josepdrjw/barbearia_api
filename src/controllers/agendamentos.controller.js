@@ -20,9 +20,9 @@ const getHorarios = async (req, res) => {
 
 // rota de buscade serviços agendados
 const getAgendamentos = async (req, res) => {
-    const { data } = req.params;
-    const agendados= await service.getAgendamentos(data);
-    console.log(agendados);
+    const { data, id } = req.params;
+    const agendados = await service.getAgendamentos(data, id);
+    // console.log(agendados);
     return res.status(200).json(agendados);
 }
 

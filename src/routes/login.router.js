@@ -1,10 +1,10 @@
 const Router = require('express').Router;
 const controller = require('../controllers/clientes.controller');
-const { validCamposEmailPass } = require('../middlewares/clientesCampos');
+const { validCamposEmailPassLogin } = require('../middlewares/clientesCampos');
 
 
 const rota = Router();
 
-rota.post('/', validCamposEmailPass, controller.login);
+rota.post('/', validCamposEmailPassLogin, controller.login);
 
 module.exports = rota;
