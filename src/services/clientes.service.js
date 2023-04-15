@@ -18,4 +18,13 @@ const cadClientes = async (dados) => {
     // return { service: {...dados} };
 }
 
-module.exports = { cadClientes, getEmail };
+const updatePass = async (email, newPassword) => {
+    const resultUpdate = await models.clientes.update(
+      { password: newPassword },
+      { where: { email } }
+    );
+    return resultUpdate[0];
+  };
+  
+
+module.exports = { cadClientes, getEmail, updatePass };

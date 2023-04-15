@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-const enviarEmail = async (destinatario) => {
+const enviarEmail = async (destinatario, name, token) => {
   // Criando o objeto de transporte SMTP reutilizável usando as configurações do Outlook
   let transporter = nodemailer.createTransport({
     host: 'smtp.office365.com',
@@ -17,7 +17,7 @@ const enviarEmail = async (destinatario) => {
     from: '"Barbearia Borges" <gilmarciapinheiropereira@outlook.com>',
     to: destinatario,
     subject: 'Redefinição de senha',
-    text: 'Este é um email automatico de redefinição de senha',
+    text: `Olá ${name} este é o link de redefinição de senha Token: https://localhost:3001/newpassword/${token}`,
   };
 
   try {
