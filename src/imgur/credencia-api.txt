@@ -1,0 +1,2 @@
+ID do Cliente: 458f514cf18c902
+Segredo do cliente: e87078edea72c6ad61410006b8681b76a7a97945
