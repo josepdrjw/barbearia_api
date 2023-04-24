@@ -1,9 +1,10 @@
+const { login } = require('../controllers/barbeiros.controller');
 const models = require('../models');
 
 const getServicos = async (id) => {
     // const corpo = { email, password };
     // findOne método que obtem a primeira entrada que encontra
-    const resultServicos = await models.servicos.findAll({ where: { barbeiro_id: id } }); 
+    const resultServicos = await models.servicos.findAll({ where: { barbeiro_id: id } });
     // return login;
     // const result = `Email: ${email} Senha: ${password}`;
     // consolo.log(corpo);
@@ -11,11 +12,25 @@ const getServicos = async (id) => {
     return resultServicos;
 };
 
-// const cadClientes = async (dados) => {
+const cadServico = async (dados) => {
 
-//     const resultCriaUsua = await models.clientes.create(dados)
-//     return resultCriaUsua;
-//     // return { service: {...dados} };
-// }
+    try {
+        const resultCriaUsua = await models.servicos.create(dados)
+        return 'Serviço cadastrado com sucesso!';
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
 
-module.exports = { getServicos };
+const updateService = async (id, newDescription, newDuration, newPrice) => {
+    // console.log(id);
+    const resultUpdate = await models.servicos.update(
+        { description: newDescription, duration: newDuration, price: newPrice },
+        { where: { id } },
+    );
+    console.log(resultUpdate[0]);
+    return resultUpdate[0];
+};
+
+module.exports = { getServicos, updateService, cadServico };

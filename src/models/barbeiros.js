@@ -71,6 +71,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      nivel: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
     }, {
       underscored: false,
       timestamps: false,

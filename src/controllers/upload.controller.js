@@ -144,7 +144,7 @@ const upload = async (req, res) => {
       await renameFile(file.path, path.join(__dirname, `../uploads/${fileName}`));
       let img = { message: fileName };
       const update = await updateImg(resulEmail.email, `http://localhost:3000/uploads/${img.message}`);
-      const resUpdate = update.image;
+      const resUpdate = `http://localhost:3000/uploads/${fileName}`;
       return res.status(201).json({ message: resUpdate });
     } catch (error) {
       console.error(error);

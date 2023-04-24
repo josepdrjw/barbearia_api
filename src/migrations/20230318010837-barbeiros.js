@@ -24,7 +24,10 @@ module.exports = {
       },
       image: {
         type: Sequelize.STRING,
-      }
+      },
+      nivel: {
+        type: Sequelize.INTEGER,
+      },
     });
     
   },

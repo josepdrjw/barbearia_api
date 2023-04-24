@@ -5,15 +5,11 @@ module.exports = {
         {
           id: 1,
           name: 'Borges',
-          email: 'borges@test.com',
+          email: 'josepdrjw@bol.com.br',
           password: 'Bor123',
-        },
-        {
-          id: 2,
-          name: 'Marcelo',
-          email: 'marcelo@test.com',
-          password: 'Mar123',
-        },
+          image: null,
+          nivel: 1,
+        }
       ], { timestamps: false });
   },
 

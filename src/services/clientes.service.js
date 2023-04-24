@@ -35,4 +35,4 @@ const updateImg = async (email, newImage) => {
 };
 
 
-module.exports = { cadClientes, getEmail, updateImg };
+module.exports = { cadClientes, getEmail, updatePass, updateImg };

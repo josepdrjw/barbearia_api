@@ -1,10 +1,12 @@
 const Router = require('express').Router;
-const controller = require('../controllers/servicos.controller');
+const { getAllServicos, cadastroServico, update } = require('../controllers/servicos.controller');
 const verifyToken = require('../middlewares/validtoken');
 
 
 const rota = Router();
 
-rota.get('/:id', verifyToken, controller.getServicos);
+rota.get('/:id', verifyToken, getAllServicos);
+rota.put('/', verifyToken, update);
+rota.post('/', verifyToken, cadastroServico);
 
 module.exports = rota;

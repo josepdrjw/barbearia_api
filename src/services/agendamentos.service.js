@@ -363,4 +363,14 @@ const postAgendamento = async (payload) => {
     // return { service: {...dados} };
 }
 
-module.exports = { getHorarios, postAgendamento, getHorariosReservados, getAgendamentos };
+const updateStatus = async (id, newStatus) => {
+    // console.log(id);
+    const resultUpdate = await models.agendamentos.update(
+        { status: newStatus },
+        { where: { id } },
+    );
+    console.log(resultUpdate[0]);
+    return resultUpdate[0];
+};
+
+module.exports = { getHorarios, postAgendamento, getHorariosReservados, getAgendamentos, updateStatus };
