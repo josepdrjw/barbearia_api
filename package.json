@@ -1,0 +1,51 @@
+{
+  "name": "barber-api",
+  "version": "0.1.0",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "engineStrict": true,
+  "private": true,
+  "dependencies": {
+    "bash": "^0.0.1",
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "8.2.0",
+    "express": "4.17.1",
+    "express-async-errors": "3.1.1",
+    "image-size": "^1.0.2",
+    "joi": "17.6.0",
+    "jsonwebtoken": "8.5.1",
+    "mime-types": "^2.1.35",
+    "moment-timezone": "^0.5.42",
+    "morgan": "1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "2.1.0",
+    "nodemailer": "^6.9.1",
+    "sequelize": "6.3.4",
+    "shelljs": "0.8.4"
+  },
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node .",
+    "drop": "npx sequelize-cli db:drop",
+    "seed": "npx sequelize-cli db:seed:all",
+    "dev": "nodemon .",
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
+  },
+  "devDependencies": {
+    "change-case": "4.1.2",
+    "eslint": "6.8.0",
+    "eslint-config-airbnb-base": "14.2.0",
+    "eslint-config-trybe-backend": "1.0.3",
+    "eslint-plugin-import": "2.22.1",
+    "frisby": "2.1.2",
+    "jest": "26.0.1",
+    "jest-each": "28.0.1",
+    "nodemon": "2.0.15",
+    "sequelize-cli": "6.2.0",
+    "sequelize-jest-helpers-trybe": "1.0.0",
+    "supertest": "4.0.2",
+    "wait-on": "6.0.1"
+  }
+}

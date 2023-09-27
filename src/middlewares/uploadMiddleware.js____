@@ -1,0 +1,18 @@
+const path = require('path');
+
+function validateImageExtension(req, res, next) {
+  if (!req.file) {
+    return res.status(400).json({ error: 'Nenhum arquivo foi enviado.' });
+  }
+
+  const allowedExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
+  const fileExtension = path.extname(req.file.originalname).toLowerCase();
+
+  if (!allowedExtensions.includes(fileExtension)) {
+    return res.status(400).json({ error: 'O arquivo enviado não é uma imagem.' });
+  }
+
+  next();
+}
+
+module.exports = { validateImageExtension };
